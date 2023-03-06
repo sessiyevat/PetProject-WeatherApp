@@ -11,6 +11,8 @@ class ForecastTableViewCell: UITableViewCell {
     
     private var weatherManager = WeatherManager()
     
+    // MARK: - UI Components
+    
     lazy private var dayLabel: UILabel = {
         let label = UILabel()
         label.text = "Today"
@@ -43,6 +45,8 @@ class ForecastTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Lifecycle
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
                         
@@ -58,22 +62,8 @@ class ForecastTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func changeLabelText() {
-        let subviews = contentView.subviews
-        for subview in subviews {
-            if subview is UILabel {
-                let currentLabel = subview as! UILabel
-                currentLabel.textAlignment = .center
-                currentLabel.textColor = .white
-            }
-        }
-    }
-}
+    //MARK: - Setup views and constraints methods
 
-//MARK: - Setup views and constraints methods
-
-private extension ForecastTableViewCell {
-    
     func setupViews() {
         contentView.addSubview(dayLabel)
         contentView.addSubview(conditionImageView)
@@ -105,6 +95,17 @@ private extension ForecastTableViewCell {
         degreeHighLabel.snp.makeConstraints { make in
             make.leading.equalTo(rowLabel.snp.trailing)
             make.top.bottom.trailing.equalToSuperview()
+        }
+    }
+     
+    func changeLabelText() {
+        let subviews = contentView.subviews
+        for subview in subviews {
+            if subview is UILabel {
+                let currentLabel = subview as! UILabel
+                currentLabel.textAlignment = .center
+                currentLabel.textColor = .white
+            }
         }
     }
 }

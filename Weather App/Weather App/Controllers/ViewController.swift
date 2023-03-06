@@ -10,14 +10,16 @@ import SnapKit
 
 final class ViewController: UIViewController {
     
+    // MARK: - Variables
+
     private var weatherManager = WeatherManager()
-//    private var data: WeatherModel
-    
     lazy private var sectionNames: [String] = ["Windy conditions from 3pm - 5pm, with heavy snow expected at 6pm.", "7-day forecast", "More detail"]
     
+    // MARK: - UI Components
+
     lazy private var backgroundfImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "bg2.jpeg")!
+        imageView.image = UIImage(named: "bg1.jpeg")!
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -33,6 +35,8 @@ final class ViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

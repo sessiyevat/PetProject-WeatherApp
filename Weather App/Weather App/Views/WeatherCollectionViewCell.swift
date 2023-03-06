@@ -12,6 +12,8 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "WeatherCollectionViewCell"
     
+    // MARK: - UI Components
+    
     lazy private var backgroundBlurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.systemUltraThinMaterialDark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -52,13 +54,15 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Lifecycle
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         contentView.backgroundColor = .clear
         contentView.layer.masksToBounds = true
         contentView.layer.cornerRadius = 20
-        
+                
         setupViews()
         setupConstraints()
     }
@@ -66,9 +70,15 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-private extension WeatherCollectionViewCell {
+    
+    func configure(with model: DetailedWeather){
+        iconImageView.image = UIImage(systemName: model.iconName)
+        titleLabel.text = model.title
+        parameterLabel.text = model.parameter
+        textLabel.text = model.desc
+    }
+    
+    //MARK: - Setup views and constraints
     
     func setupViews() {
         contentView.addSubview(backgroundBlurEffectView)
@@ -109,6 +119,6 @@ private extension WeatherCollectionViewCell {
             make.width.equalToSuperview().multipliedBy(0.7)
             make.leading.equalToSuperview().inset(10)
         }
-        
     }
 }
+

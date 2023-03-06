@@ -13,4 +13,8 @@ struct WeatherModel {
     let desc: String
     let hTemp: Double
     let lTemp: Double
+    let feelsLike: Double
+    let humidity: Int
+    let pressure: Int
+    let visibility: Int
 }

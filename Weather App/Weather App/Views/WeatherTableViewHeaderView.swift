@@ -10,6 +10,8 @@ import SnapKit
 
 final class WeatherTableViewHeaderView: UIView {
         
+    // MARK: - UI Components
+
     lazy private var cityLabel: UILabel = {
         let label = UILabel()
          label.font = UIFont.systemFont(ofSize: 30)
@@ -47,6 +49,8 @@ final class WeatherTableViewHeaderView: UIView {
         return blurEffectView
     }()
 
+    // MARK: - Lifecycle
+
     override init(frame: CGRect) {
         super.init(frame: frame)
                 
@@ -75,27 +79,8 @@ final class WeatherTableViewHeaderView: UIView {
         weatherLabel.text = model.desc.capitalized
         highLowLabel.text = "H:\(Int(model.hTemp))°, L:\(Int(model.lTemp))°"
     }
-}
-
-// MARK: - Weather manager delegate methods
-
-extension WeatherTableViewHeaderView: WeatherManagerDelegate {
     
-    func didUpdateWeather(_ weatherManager: WeatherManager, with model: WeatherModel) {
-        DispatchQueue.main.async { [self] in
-            self.cityLabel.text = model.cityName
-            degreeLabel.text = " \(Int(model.temp))°"
-            weatherLabel.text = model.desc.capitalized
-            highLowLabel.text = "H:\(Int(model.hTemp))°, L:\(Int(model.lTemp))°"
-        }
-    }
-    
-    func didFailWithError(error: Error) {
-        print(error)
-    }
-}
-
-private extension WeatherTableViewHeaderView {
+    //MARK: - Setup views and constraints
     
     func setUpViews() {
         addSubview(cityLabel)
@@ -124,4 +109,24 @@ private extension WeatherTableViewHeaderView {
             make.centerX.equalToSuperview()
         }
     }
+
 }
+
+// MARK: - Weather manager delegate methods
+
+extension WeatherTableViewHeaderView: WeatherManagerDelegate {
+    
+    func didUpdateWeather(_ weatherManager: WeatherManager, with model: WeatherModel) {
+        DispatchQueue.main.async { [self] in
+            self.cityLabel.text = model.cityName
+            degreeLabel.text = " \(Int(model.temp))°"
+            weatherLabel.text = model.desc.capitalized
+            highLowLabel.text = "H:\(Int(model.hTemp))°, L:\(Int(model.lTemp))°"
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+}
+

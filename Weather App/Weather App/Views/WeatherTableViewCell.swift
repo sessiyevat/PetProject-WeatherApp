@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 final class WeatherTableViewCell: UITableViewCell {
+    
+    // MARK: - UI Components
+    
     lazy private var myLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -24,6 +27,8 @@ final class WeatherTableViewCell: UITableViewCell {
         setupConstraints()
     }
     
+    // MARK: - Lifecycle
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -31,11 +36,8 @@ final class WeatherTableViewCell: UITableViewCell {
     func setText(with content: String) {
         myLabel.text = content
     }
-}
-
-//MARK: Setup views and constraints
-
-private extension WeatherTableViewCell {
+    
+    //MARK: Setup views and constraints
     
     func setupViews() {
         contentView.addSubview(myLabel)

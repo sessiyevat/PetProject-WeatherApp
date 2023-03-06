@@ -10,6 +10,8 @@ import SnapKit
 
 final class TableViewCellWithCollectionView: UITableViewCell {
             
+    // MARK: - UI Components
+
     lazy private var actualWeatherCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -26,6 +28,8 @@ final class TableViewCellWithCollectionView: UITableViewCell {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return blurEffectView
     }()
+    
+    // MARK: - Lifecycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,34 +48,9 @@ final class TableViewCellWithCollectionView: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
+    
+    //MARK: Setup views and constraints
 
-extension TableViewCellWithCollectionView: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = actualWeatherCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.Identifiers.CollectionViewCell, for: indexPath) as! CollectionViewCell
-        
-        return cell
-    }
-}
-
-extension TableViewCellWithCollectionView: UICollectionViewDelegate {
-    
-}
-
-extension TableViewCellWithCollectionView: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 55, height: 100)
-    }
-}
-
-private extension TableViewCellWithCollectionView {
-    
     func setupViews() {
         contentView.addSubview(backgroundBlurEffectView)
         contentView.addSubview(actualWeatherCollectionView)
@@ -84,5 +63,27 @@ private extension TableViewCellWithCollectionView {
         actualWeatherCollectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
         }
+    }
+}
+
+// MARK: - delegate, dataSource methods
+
+extension TableViewCellWithCollectionView: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = actualWeatherCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.Identifiers.CollectionViewCell, for: indexPath) as! CollectionViewCell
+        
+        return cell
+    }
+}
+
+extension TableViewCellWithCollectionView: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: 55, height: 100)
     }
 }

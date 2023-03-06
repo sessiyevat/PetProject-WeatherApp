@@ -10,6 +10,8 @@ import SnapKit
 
 final class TableViewCellWithTableView: UITableViewCell {
 
+    // MARK: - UI Components
+
     lazy private var forecastTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: Constants.Identifiers.ForecastTableViewCell)
@@ -25,6 +27,8 @@ final class TableViewCellWithTableView: UITableViewCell {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return blurEffectView
     }()
+    
+    // MARK: - Lifecycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,26 +47,8 @@ final class TableViewCellWithTableView: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-extension TableViewCellWithTableView: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Identifiers.ForecastTableViewCell, for: indexPath) as! ForecastTableViewCell
-        cell.backgroundColor = .clear
-        return cell
-    }
-}
-
-extension TableViewCellWithTableView: UITableViewDelegate {
-    
-}
-
-private extension TableViewCellWithTableView {
+    //MARK: Setup views and constraints
     
     func setupViews() {
         contentView.addSubview(backgroundBlurEffectView)
@@ -79,3 +65,20 @@ private extension TableViewCellWithTableView {
         }
     }
 }
+
+// MARK: - delegate, dataSource methods
+
+extension TableViewCellWithTableView: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 7
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Identifiers.ForecastTableViewCell, for: indexPath) as! ForecastTableViewCell
+        cell.backgroundColor = .clear
+        return cell
+    }
+}
+
+

@@ -12,6 +12,8 @@ class CollectionViewCell: UICollectionViewCell {
     
     private var weatherManager = WeatherManager()
     
+    // MARK: - UI Components
+
     lazy private var timeLabel: UILabel = {
         let label = UILabel()
         label.text = "now"
@@ -32,6 +34,8 @@ class CollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Lifecycle
+
     override init(frame: CGRect) {
         super.init(frame: frame)
                         
@@ -47,23 +51,8 @@ class CollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func changeLabelText() {
-        let subviews = contentView.subviews
-        for subview in subviews {
-            if subview is UILabel {
-                let currentLabel = subview as! UILabel
-                currentLabel.textAlignment = .center
-                currentLabel.textColor = .white
-            }
-        }
-    }
+    //MARK: - Setup views and constraints methods
 
-}
-
-//MARK: - Setup views and constraints methods
-
-private extension CollectionViewCell {
-    
     func setupViews() {
         contentView.addSubview(timeLabel)
         contentView.addSubview(conditionImageView)
@@ -85,6 +74,18 @@ private extension CollectionViewCell {
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
+    
+    func changeLabelText() {
+        let subviews = contentView.subviews
+        for subview in subviews {
+            if subview is UILabel {
+                let currentLabel = subview as! UILabel
+                currentLabel.textAlignment = .center
+                currentLabel.textColor = .white
+            }
+        }
+    }
+
 }
 
 extension CollectionViewCell: WeatherManagerDelegate {
