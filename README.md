@@ -1,7 +1,7 @@
 # PetProject-WeatherApp
 
 In this project I used Current Weather API from https://openweathermap.org. 
-[I also wanted to work with forecast data, since It was paid, I didn't want to spent time for searching other available APIs. So, in houly and daily forecast sections I used current temperature.]
+[I also wanted to work with forecast data, since It was paid, I didn't want to spent time for searching other available APIs. So, in houly and daily forecast sections I used the current temperature.]
 
 #### Framework: UIKit
 #### Design pattern: MVC
